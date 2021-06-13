@@ -8,11 +8,27 @@
   </head>
 
   <body>
+    <script>
+      function rebaseElement(title, min, sec) {
+        let inputText = document.getElementById(title).value;
+        let inputMinutes = document.getElementById(min).value;
+        let inputSeconds = document.getElementById(sec).value;
+        document.getElementsByClassName('rebase')[0].innerHTML = '';
+        document.getElementsByClassName('rebase')[0].innerHTML = `${inputMinutes}:${inputSeconds} ${inputText}`;
+        document.getElementsByClassName('rebase')[0].classList.remove('rebase');
+      }
+    </script>
+
     <div id="timer"></div>
-    <p style="font-size: 4em;">Drawing</p>
-    <div id="list"></div>
+    <div id="timer-button"></div>
+
+    <p style="font-size: 4em; margin: 0px;">Drawing</p>
+
+    <div id="listApp"></div>
+    <div id="plus-button">+</div>
+
   </body>
 
-  <script src="js/app.js" type="application/javascript"></script>
+  <script src="js/app.js" type="module"></script>
   <link rel="stylesheet" href="css/style.css" />
 </html>

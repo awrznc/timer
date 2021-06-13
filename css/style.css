@@ -1,6 +1,38 @@
 * {
     font-family: consolas;
+    text-align: center;
 }
+
+
+#rebase {
+    text-align: left;
+}
+
+/**
+  * Button
+  **/
+.button {
+    width: 80px;
+    height: 80px;
+    margin: 4px;
+    display: inline-block;
+
+    border-radius: 50%;
+    border: solid 1px #CCCCCC;
+}
+.button:hover {
+    background: #EEEEEE;
+    cursor: pointer;
+}
+
+/**
+  * Plus button.
+  **/
+#plus-button:hover {
+    background: #EEEEEE;
+    cursor: pointer;
+}
+
 
 li {
     font-size: 2em;
@@ -11,7 +43,7 @@ li {
   **/
 .current-list   { color: #000000; }
 .future-list    { color: #7F7F7F; }
-.past-list      { color: #C3C3C3; }
+.past-list      { color: #CCCCCC; }
 
 /**
   * Main frame
@@ -91,11 +123,11 @@ li {
 
 @keyframes first-rotation {
     0% {
-        background: #C3C3C3;
+        background: #CCCCCC;
         transform-origin: left;
     }
     100% {
-        background: #C3C3C3;
+        background: #CCCCCC;
         transform-origin: left;
         transform: rotate(-360deg);
     }
@@ -113,12 +145,12 @@ li {
         transform: rotate(180deg);
     }
     50.000001% {
-        background: #C3C3C3;
+        background: #CCCCCC;
         transform-origin: right;
         transform: rotate(360deg);
     }
     100% {
-        background: #C3C3C3;
+        background: #CCCCCC;
         transform-origin: right;
         transform: rotate(360deg);
     }

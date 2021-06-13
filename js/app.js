@@ -1,34 +1,5 @@
-class List {
-
-  // Constructor.
-  constructor(element) {
-    element.insertAdjacentHTML('beforeend', '<ul></ul>');
-    if(element.childNodes.length != 1) alert('[ERROR] Constructor in List class.');
-    this.ul = element.childNodes[0];
-  }
-
-  // Generate "li" element.
-  generate(string) {
-    return `<li>${string}</li>`;
-  }
-
-  // Add "li" element.
-  add(string) {
-    let html_string = this.generate(string);
-    this.ul.insertAdjacentHTML('beforeend', html_string);
-  }
-
-  // Remove "li" element with index.
-  remove(index) {
-    let li = this.ul.getElementsByTagName('li');
-    if(li.length > index && -1 < index) li[index].remove();
-  }
-
-  addClass(classString, index) {
-    this.ul.childNodes[index].classList.add(classString);
-  }
-}
-
+import { List } from './list.js';
+import { Button } from './button.js';
 
 class TimerApplication {
 
@@ -76,13 +47,13 @@ class TimerApplication {
 
       let countdown = function (ld) {
         let nd = new Date();
-        let diff   = ld . getTime() - nd.getTime();
+        let diff = ld.getTime() - nd.getTime();
         let sec = Math.floor( diff / 1000 ) % 60;
         let min = Math.floor( diff / 1000 / 60 ) % 60;
 
-        document.getElementById("min").textContent = String(min).padStart(2,"0");
-        document.getElementById("sec").textContent = String(sec).padStart(2,"0");
-        console.log(String(sec).padStart(2,"0"));
+        document.getElementById('min').textContent = String(min).padStart(2, '0');
+        document.getElementById('sec').textContent = String(sec).padStart(2, '0');
+        console.log(String(sec).padStart(2,'0'));
 
         if(sec == 0 && min == 0) {
           return 0;
@@ -114,24 +85,35 @@ const seconds = 10;
 const minutes = 0;
 let app = new TimerApplication('timer', minutes, seconds);
 
+// Button
+let button = new Button(document.getElementById('timer-button'), document, 'start');
+
 // List
-let list = new List(document.getElementById('list'));
+let list = new List(document.getElementById('listApp'));
 list.add('Buffer.');
-list.addClass('past-list', 0);
+list.addClass('current-list', 0);
 
-list.add('Rough sketching.');
-list.addClass('past-list', 1);
+// Plus button.
+let html = `
+      <div>
+        <form onsubmit="rebaseElement('rebase-title', 'minutes-output-bar', 'seconds-output-bar'); return false"><input id="rebase-title" type="text" placeholder="title" autofocus/></form>
+      </div>
 
-list.add('Rough painting.');
-list.addClass('past-list', 2);
+      <div>
+        min :
+        <input id="minutes-output-box" type="text" value="0" style="width: 32px; text-align: center;" oninput="document.getElementById('minutes-output-bar').value=this.value"/>
+        <input id="minutes-output-bar" type="range" value="0" min="0" max="59" step="1" oninput="document.getElementById('minutes-output-box').value=this.value">
+      </div>
 
-list.add('Line drawing.');
-list.addClass('current-list', 3);
+      <div>
+        sec :
+        <input id="seconds-output-box" type="text" value="0" style="width: 32px; text-align: center;" oninput="document.getElementById('seconds-output-bar').value=this.value"/>
+        <input id="seconds-output-bar" type="range" value="0" min="0" max="59" step="1" oninput="document.getElementById('seconds-output-box').value=this.value">
+      </div>
+`;
 
-list.add('Painting.');
-list.addClass('future-list', 4);
-
-list.add('Processing.');
-list.addClass('future-list', 5);
-
-// list.remove(0);
+document.getElementById('plus-button').onclick = function () {
+  list.add(html);
+  list.addClass('future-list', list.length - 1);
+  list.addClass('rebase', list.length - 1);
+}
