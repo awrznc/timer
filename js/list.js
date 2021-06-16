@@ -8,14 +8,14 @@ export class List {
     this.length = 0;
   }
 
-  // Generate "li" element.
+  // Generate "li" content.
   generate(string) {
-    return `<li>${string} <button id="remove-list-${this.length - 1}">del</button></li>`;
+    return `${string} <button id="remove-list-${this.length - 1}">del</button>`;
   }
 
   // Add "li" element.
   add(string) {
-    let htmlString = this.generate(string);
+    let htmlString = `<li>${this.generate(string)}</li>`;
     this.ul.insertAdjacentHTML('beforeend', htmlString);
     this.length = this.ul.childNodes.length;
     this.rehashId();
@@ -25,6 +25,14 @@ export class List {
   remove(index) {
     let li = this.ul.getElementsByTagName('li');
     if(li.length > index && -1 < index) li[index].remove();
+    this.length = this.ul.childNodes.length;
+    this.rehashId();
+  }
+
+  // Rebase "li" element with index.
+  rebase(rebaseString, index) {
+    let htmlString = this.generate(rebaseString);
+    this.ul.childNodes[index].innerHTML = htmlString;
     this.length = this.ul.childNodes.length;
     this.rehashId();
   }
@@ -41,7 +49,6 @@ export class List {
     let self = this;
     this.ul.childNodes.forEach(function (li, index) {
       li.id = `list${index}`;
-      console.log(li.childNodes);
       li.childNodes[li.childNodes.length-1].onclick = function () {
         self.remove(index);
       }
