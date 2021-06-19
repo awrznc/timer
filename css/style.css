@@ -121,6 +121,14 @@ li {
     /* animation-duration: 10s; */
 }
 
+.stop-animation {
+    animation-play-state: paused;
+}
+
+.run-animation {
+    animation-play-state: running;
+}
+
 @keyframes first-rotation {
     0% {
         background: #CCCCCC;
