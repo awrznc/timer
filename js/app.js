@@ -21,19 +21,20 @@ export class TimerApplication {
     timer.update(minutes, seconds);
 
     // Button.
-    this.app.insertAdjacentHTML('beforeend', `<div id="timer-button"></div>`);
-    this.app.insertAdjacentHTML('beforeend', `<p style="font-size: 4em; margin: 0px;">Drawing</p>`);
-    let button = new Button(document.getElementById('timer-button'), 'start');
+    // this.app.insertAdjacentHTML('beforeend', `<div id="timer-button"></div>`);
+    // this.app.insertAdjacentHTML('beforeend', `<p style="font-size: 4em; margin: 0px;">Drawing</p>`);
+    // let button = new Button(document.getElementById('timer-button'), 'start');
 
     // List.
     this.app.insertAdjacentHTML('beforeend', `<div id="listApp"></div>`);
     let list = new List(document.getElementById('listApp'));
-    list.add('Buffer.');
-    list.addClass('current-list', 0);
 
     // Plus button.
     this.app.insertAdjacentHTML('beforeend', `<div id="plus-button">+</div>`);
     document.getElementById('plus-button').onclick = function () {
+
+      let candidateMinutes = 0;
+      let candidateSeconds = 0;
 
       // Input li.
       let li = document.createElement('li');
@@ -61,12 +62,11 @@ export class TimerApplication {
       minutesInputBar.setAttribute('step', '1');
       function handleInput(e) {
         let inputMinutesValue = e.target.value;
-        timer.minutes = inputMinutesValue;
-        timer.resetMinutes = inputMinutesValue;
-        timer.allSec = (timer.minutes * 60) + Number(timer.seconds);
+        candidateMinutes = inputMinutesValue;
+        timer.allSec = ((Number(candidateMinutes) + Number(timer.resetMinutes)) * 60) + Number(candidateSeconds) + Number(timer.resetSeconds);
 
         document.getElementById('minutes-output-box').value = inputMinutesValue;
-        document.getElementById('min').textContent = inputMinutesValue;
+        document.getElementById('min').textContent = String(Number(inputMinutesValue) + Number(timer.resetMinutes)).padStart(2, '0')
         document.getElementsByClassName('first-rotate-animator')[0].setAttribute('style', `animation-duration: ${timer.allSec - 1}s;`);
         document.getElementsByClassName('second-rotate-animator')[0].setAttribute('style', `animation-duration: ${timer.allSec - 1}s;`);
         document.getElementsByClassName('color-animator')[0].setAttribute('style', `animation-duration: ${timer.allSec - 1}s;`);
@@ -97,13 +97,12 @@ export class TimerApplication {
       secondsInputBar.setAttribute('max', '59');
       secondsInputBar.setAttribute('step', '1');
       function handleSecondsInput(e) {
-        let inputSecoundsValue = e.target.value;
-        timer.seconds = inputSecoundsValue;
-        timer.resetSeconds = inputSecoundsValue;
-        timer.allSec = (timer.minutes * 60) + Number(timer.seconds);
+        let inputSecondsValue = e.target.value;
+        candidateSeconds = inputSecondsValue;
+        timer.allSec = ((Number(candidateMinutes) + Number(timer.resetMinutes)) * 60) + Number(candidateSeconds) + Number(timer.resetSeconds);
 
-        document.getElementById('seconds-output-box').value = inputSecoundsValue;
-        document.getElementById('sec').textContent = inputSecoundsValue;
+        document.getElementById('seconds-output-box').value = inputSecondsValue;
+        document.getElementById('sec').textContent = String(Number(inputSecondsValue) + Number(timer.resetSeconds)).padStart(2, '0');
         document.getElementsByClassName('first-rotate-animator')[0].setAttribute('style', `animation-duration: ${timer.allSec - 1}s;`);
         document.getElementsByClassName('second-rotate-animator')[0].setAttribute('style', `animation-duration: ${timer.allSec - 1}s;`);
         document.getElementsByClassName('color-animator')[0].setAttribute('style', `animation-duration: ${timer.allSec - 1}s;`);
@@ -131,6 +130,13 @@ export class TimerApplication {
         let inputSeconds = document.getElementById(sec).value;
         let string = `${String(inputMinutes).padStart(2, '0')}:${String(inputSeconds).padStart(2, '0')} ${inputText}`;
         list.rebase(string, list.length - 1);
+
+        timer.minutes = Number(candidateMinutes) + timer.minutes;
+        timer.resetMinutes = Number(candidateMinutes) + timer.resetMinutes;
+        timer.seconds = Number(candidateSeconds) + timer.seconds;
+        timer.resetSeconds = Number(candidateSeconds) + timer.resetSeconds;
+        timer.allSec = (Number(timer.minutes) * 60) + Number(timer.seconds);
+
         return false;
       };
       form.appendChild(formInput);
