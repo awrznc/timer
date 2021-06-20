@@ -13,10 +13,18 @@ export class List {
     return `${string} <button id="remove-list-${this.length - 1}">del</button>`;
   }
 
-  // Add "li" element.
+  // Add "li" element string.
   add(string) {
     let htmlString = `<li>${this.generate(string)}</li>`;
     this.ul.insertAdjacentHTML('beforeend', htmlString);
+    this.length = this.ul.childNodes.length;
+    this.rehashId();
+  }
+
+  // Add element object.
+  addElement(elementObject) {
+    elementObject.insertAdjacentHTML('beforeend', this.generate(''));
+    this.ul.appendChild(elementObject);
     this.length = this.ul.childNodes.length;
     this.rehashId();
   }
