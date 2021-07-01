@@ -1,11 +1,16 @@
 * {
     font-family: consolas;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 
 #rebase {
     text-align: left;
+}
+
+#circle:hover {
+    cursor: pointer;
 }
 
 /**
@@ -20,6 +25,7 @@
     border-radius: 50%;
     border: solid 1px #CCCCCC;
 }
+
 .button:hover {
     background: #EEEEEE;
     cursor: pointer;
