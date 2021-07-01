@@ -1,0 +1,215 @@
+* {
+    font-family: consolas;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#rebase {
+    text-align: left;
+}
+
+#circle:hover {
+    cursor: pointer;
+}
+
+/**
+  * Button
+  **/
+.button {
+    width: 80px;
+    height: 80px;
+    margin: 4px;
+    display: inline-block;
+
+    border-radius: 50%;
+    border: solid 1px #CCCCCC;
+}
+
+.button:hover {
+    background: #EEEEEE;
+    cursor: pointer;
+}
+
+/**
+  * Plus button.
+  **/
+#plus-button:hover {
+    background: #EEEEEE;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    font-size: 2em;
+}
+
+/**
+  * Color for list.
+  **/
+.current-list   { color: #000000; }
+.future-list    { color: #7F7F7F; }
+.past-list      { color: #CCCCCC; }
+
+/**
+  * Main frame
+  **/
+.main-frame {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+/**
+  * Color animation.
+  * Green -> Orange -> Red
+  **/
+.color-animator {
+    position: absolute;
+    width: 98%;
+    height: 98%;
+    border-radius: 50%;
+    background: #22B14C;
+    overflow: hidden;
+    animation-timing-function: linear;
+
+        /* center */
+        padding: auto;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+}
+
+.timer-color-animation {
+    /* animation: timer-color 10s; */
+    animation-name: timer-color;
+    animation-fill-mode: forwards;
+}
+
+@keyframes timer-color {
+    0%    { background: #22B14C; }
+    49%   { background: #22B14C; }
+    51%   { background: orange; }
+    74%   { background: orange; }
+    76%   { background: red; }
+    100%  { background: red; }
+}
+
+/**
+  * Rorate animation.
+  * Right and Left
+  **/
+.first-rotate-animator {
+    float: right;
+    width: 50%;
+    height: 100%;
+    background: #22B14C;
+    animation-timing-function: linear;
+}
+
+.second-rotate-animator {
+    float: right;
+    width: 50%;
+    height: 100%;
+    background: #22B14C;
+    animation-timing-function: linear;
+}
+
+.first-rotate-animation {
+    animation-name: first-rotation;
+    /* animation-duration: 10s; */
+}
+
+.second-rotate-animation {
+    animation-name: second-rotation;
+    /* animation-duration: 10s; */
+}
+
+.stop-animation {
+    animation-play-state: paused;
+}
+
+.run-animation {
+    animation-play-state: running;
+}
+
+@keyframes first-rotation {
+    0% {
+        background: #CCCCCC;
+        transform-origin: left;
+    }
+    100% {
+        background: #CCCCCC;
+        transform-origin: left;
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes second-rotation {
+    0% {
+        background: #22B14C;
+        transform-origin: right;
+        transform: rotate(180deg);
+    }
+    50% {
+        background: #22B14C;
+        transform-origin: right;
+        transform: rotate(180deg);
+    }
+    50.000001% {
+        background: #CCCCCC;
+        transform-origin: right;
+        transform: rotate(360deg);
+    }
+    100% {
+        background: #CCCCCC;
+        transform-origin: right;
+        transform: rotate(360deg);
+    }
+}
+
+/**
+  * Counter
+  **/
+.counter {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: white;
+
+    /* center */
+    padding: auto;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.time {
+    position: absolute;
+    text-align:center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width:100%;
+    font-size: 500%;
+}
+
+.border {
+    position: absolute;
+    width: 97%;
+    height: 97%;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0);
+
+    border: solid;
+    border-width: 4px;
+    border-color: white;
+}
