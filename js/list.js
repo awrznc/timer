@@ -1,6 +1,20 @@
 export class List {
 
-  // Constructor.
+  /**
+    * @property {Number} length
+    */
+  length;
+
+  /**
+   * @property {ChildNode}
+   */
+  ul;
+
+  /**
+   * Constructor.
+   * @constructor
+   * @param {HTMLElement} element
+   */
   constructor(element) {
     element.insertAdjacentHTML('beforeend', '<ul id="list"></ul>');
     if(element.childNodes.length != 1) alert('[ERROR] Initialize Error in List class.');
@@ -8,12 +22,19 @@ export class List {
     this.length = 0;
   }
 
-  // Generate "li" content.
+  /**
+   * Generate "li" content.
+   * @param {String} string
+   * @return {String}
+   */
   generate(string) {
     return `${string} <button id="remove-list-${this.length - 1}">del</button>`;
   }
 
-  // Add "li" element string.
+  /**
+   * Add "li" element string.
+   * @param {String} string
+   */
   add(string) {
     let htmlString = `<li>${this.generate(string)}</li>`;
     this.ul.insertAdjacentHTML('beforeend', htmlString);
@@ -21,7 +42,10 @@ export class List {
     this.rehashId();
   }
 
-  // Add element object.
+  /**
+   * Add element object.
+   * @param {HTMLLIElement} elementObject
+   */
   addElement(elementObject) {
     elementObject.insertAdjacentHTML('beforeend', this.generate(''));
     this.ul.appendChild(elementObject);
@@ -29,7 +53,10 @@ export class List {
     this.rehashId();
   }
 
-  // Remove "li" element with index.
+  /**
+   * Remove "li" element with index.
+   * @param {Number} index
+   */
   remove(index) {
     let li = this.ul.getElementsByTagName('li');
     if(li.length > index && -1 < index) li[index].remove();
@@ -37,7 +64,11 @@ export class List {
     this.rehashId();
   }
 
-  // Rebase "li" element with index.
+  /**
+   * Rebase "li" element with index.
+   * @param {String} rebaseString
+   * @param {Number} index
+   */
   rebase(rebaseString, index) {
     let htmlString = this.generate(rebaseString);
     this.ul.childNodes[index].innerHTML = htmlString;
@@ -45,6 +76,11 @@ export class List {
     this.rehashId();
   }
 
+  /**
+   * Add class name.
+   * @param {String} classString
+   * @param {Number} index
+   */
   addClass(classString, index) {
     this.ul.childNodes[index].classList.add(classString);
   }
@@ -53,6 +89,9 @@ export class List {
     this.ul.childNodes[index].setAttribute('id', idString);
   }
 
+  /**
+   * Rehash instance list.
+   */
   rehashId() {
     let self = this;
     this.ul.childNodes.forEach(function (li, index) {
