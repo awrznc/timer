@@ -4,7 +4,12 @@ import { Timer } from './timer.js';
 
 export class TimerApplication {
 
-  // Constructor.
+  /**
+   * Constructor.
+   * @constructor
+   * @param {String} id
+   * @param {Document} document
+   */
   constructor( id, document ) {
 
     let self = this;
