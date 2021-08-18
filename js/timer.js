@@ -1,5 +1,11 @@
 export class Timer {
-  // Constructor.
+  /**
+   * Constructor.
+   * @param {HTMLElement} element
+   * @param {Document} document
+   * @param {Number} min
+   * @param {Number} sec
+   */
   constructor( element, document, min, sec ) {
 
     // Application.
@@ -133,10 +139,16 @@ export class Timer {
     colorAnimator.insertAdjacentHTML('beforeend', '<div class="counter"><div class="time"><span id="min">00</span>:<span id="sec">00</span></div></div>');
   }
 
+  /**
+   * Reset timer.
+   */
   reset() {
     this.allSec = (this.minutes * 60) + this.seconds;
   }
 
+  /**
+   * Update timer.
+   */
   update() {
     document.getElementById('min').textContent = String(this.minutes).padStart(2, '0');
     document.getElementById('sec').textContent = String(this.seconds).padStart(2, '0');
