@@ -1,9 +1,9 @@
 // @ts-check
 
-// @ts-types="npm:@types/k6@1.3.0"
+// @ts-types="npm:@types/k6@1.4.0"
 import { check, sleep } from 'k6';
 
-// @ts-types="npm:@types/k6@1.3.0/browser"
+// @ts-types="npm:@types/k6@1.4.0/browser"
 import { browser } from 'k6/browser';
 
 const HOST = 'server';
@@ -60,7 +60,11 @@ async function test(tag, page, url, options) {
   const RESPONSE = await page.goto(url);
   checkEqual(`${tag}: page url`, await page.url(), url);
   checkEqual(`${tag}: page title`, await page.title(), 'timer');
-  checkEqual(`${tag}: http response status code`, await RESPONSE.status(), 200);
+
+  // the same URL with a different hash
+  if (RESPONSE != null) {
+    checkEqual(`${tag}: http response status code`, await RESPONSE.status(), 200);
+  }
 
   for (const OPTION of options) {
     await OPTION(tag, page);

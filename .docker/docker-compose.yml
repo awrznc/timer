@@ -9,7 +9,7 @@ services:
       - default
 
   tester:
-    image: grafana/k6:1.3.0-with-browser
+    image: grafana/k6:1.4.0-with-browser
     volumes:
       - ../test/:/opt/k6/
     working_dir: /opt/k6/
