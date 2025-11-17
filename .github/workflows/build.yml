@@ -15,4 +15,5 @@ jobs:
       run: |
         docker compose -f ./.docker/docker-compose.yml up -d
         docker compose -f ./.docker/docker-compose.yml run --rm tester run test.js
+        docker compose -f ./.docker/docker-compose.yml run --rm checker deno check ./test/test.js
         docker compose -f ./.docker/docker-compose.yml down

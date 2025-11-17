@@ -17,3 +17,9 @@ services:
       - server
     networks:
       - default
+
+  checker:
+    image: denoland/deno:2.5.6
+    volumes:
+      - ../:/opt/timer/
+    working_dir: /opt/timer/

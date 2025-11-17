@@ -1,6 +1,9 @@
 // @ts-check
 
+// @ts-types="npm:@types/k6@1.3.0"
 import { check, sleep } from 'k6';
+
+// @ts-types="npm:@types/k6@1.3.0/browser"
 import { browser } from 'k6/browser';
 
 const HOST = 'server';
@@ -44,7 +47,7 @@ function checkEqual(tag, a, b) {
 function checkNotEqual(tag, a, b) {
   let test = new Map();
   test.set(`${tag}: ${a} != ${b}`, () => a != b);
-  check(null, test);
+  check(null, Object.fromEntries(test));
 }
 
 /**
