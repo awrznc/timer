@@ -1,0 +1,19 @@
+name: Build
+
+on: [push]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Get files
+      uses: actions/checkout@v4
+
+    - name: Test
+      run: |
+        docker compose -f ./.devcontainer/docker-compose.yml up -d
+        docker compose -f ./.devcontainer/docker-compose.yml run --rm tester run test.js
+        docker compose -f ./.devcontainer/docker-compose.yml run --rm checker deno check ./test/test.js
+        docker compose -f ./.devcontainer/docker-compose.yml down

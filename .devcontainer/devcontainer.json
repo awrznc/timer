@@ -1,0 +1,8 @@
+{
+    "name": "dev-container",
+    "dockerComposeFile": [
+        "./docker-compose.yml"
+    ],
+    "service": "checker",
+    "workspaceFolder": "/workspaces/timer"
+}
