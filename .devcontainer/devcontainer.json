@@ -4,5 +4,5 @@
         "./docker-compose.yml"
     ],
     "service": "checker",
-    "workspaceFolder": "/opt/timer/"
+    "workspaceFolder": "/workspaces/timer"
 }

@@ -21,5 +21,5 @@ services:
   checker:
     image: denoland/deno:2.5.6
     volumes:
-      - ../:/opt/timer/
-    working_dir: /opt/timer/
+      - ../:/workspaces/timer
+    working_dir: /workspaces/timer
