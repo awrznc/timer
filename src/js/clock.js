@@ -255,13 +255,16 @@ export class Clock {
     * @param {Number} strokeDasharray
     */
   #setCircleAnimate(document, duration, strokeDasharray) {
-    const baseAngle = -90;
+    // const baseAngle = -90;
+    const len = this.list.length;
+    const baseAngle = -90 + ((360 - (len * 10)) / 6);
     let front = document.getElementById(this.id.circleFront);
     front?.setAttribute("transform", `rotate(${baseAngle}, 100, 100)`);
-    front?.setAttribute("stroke-dasharray", `${strokeDasharray}`);
+    // front?.setAttribute("stroke-dasharray", `${strokeDasharray}`);
     // MEMO: 範囲や間隔は以下のような形で調整できる
-    // front?.setAttribute("stroke-dasharray", `${100} ${strokeDasharray * 2}`);
-    // front?.setAttribute('from', `${strokeDasharray / 40}`);
+    front?.setAttribute("stroke-dasharray", `${100} ${strokeDasharray * 2}`);
+    front?.setAttribute('from', `${strokeDasharray / 40}`);
+    front?.setAttribute('stroke-linecap', 'round');
 
     // document.getElementById(this.id.circleFrontAnimate)?.remove();
     let animate = document.getElementById(this.id.circleFrontAnimate);
