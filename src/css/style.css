@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&family=Roboto:ital,wght@0,700;1,700&display=swap');
+
+* {
+    font-family: 'Roboto', 'Noto Sans JP';
+    font-weight: bold;
+}
+
+:root {
+    --font-color: #111;
+    --circle-back-color: #EEE;
+    --circle-front-color: #0B0;
+    --background-color: #FFF;
+    --background-transparency: 70%;
+}
+
+.text {
+    fill: var(--font-color);
+}
+
+.bar-color-front {
+    stroke: var(--circle-front-color);
+}
+
+.bar-color-back {
+    stroke: var(--circle-back-color);
+}
+
+.bar-front {
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.bar-back {
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+/* #clock-circle-front {
+    stroke-linecap: round;
+} */
+
+#clock-main {
+    width: 200px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+}
+
+#clock-background {
+    width: 200px;
+    border-radius: 12px;
+    background-color: color-mix(in srgb, var(--background-color) var(--background-transparency), transparent);
+    /* margin: 0 auto; */
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.run {
+    animation-play-state: running;
+}
+
+.pause {
+    animation-play-state: paused;
+}

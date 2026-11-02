@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="カウントダウンタイマーのヘルプです。">
+  <title>timer&nbsp;-&nbsp;help</title>
+  <link rel="icon" href="data:,">
+</head>
+
+<body>
+  <h1>Help</h1>
+  <p>
+    <a href="/?tasks=00:00:01-Task1,00:00:02-Task2,00:00:03-Task3" target="_blank">カウントダウンタイマー</a>のヘルプです。<br>
+    ソースコードは<a href="https://github.com/awrznc/timer" target="_blank">こちら</a>。
+  </p>
+  <h2>操作方法</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>設定</td>
+        <td>後述の「クエリパラメータ」を参照。</td>
+      </tr>
+      <tr>
+        <td>開始</td>
+        <td>停止中のタイマーをマウスでクリック。<br>後述の「クエリパラメータ」でページを読み込んだタイミングに変更できます。</td>
+      </tr>
+      <tr>
+        <td>停止</td>
+        <td>動作中のタイマーをマウスでクリック。</td>
+      </tr>
+      <tr>
+        <td>初期化</td>
+        <td>ブラウザを更新。<br>もしくはタイマーのカウントダウンが終了してからマウスでクリック。</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>クエリパラメータ</h2>
+  <p>タイマーに入力する情報は、URLのクエリパラメータから指定できます。</p>
+  <table border="1">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>trigger</td>
+        <td>
+          タイマー開始のタイミング。<br>
+          指定できる値:<br>
+          -&nbsp;click:&nbsp;タイマーをマウスでクリックしたときに開始（デフォルト）<br>
+          -&nbsp;onload:&nbsp;ページを読み込んだときに開始<br>
+        </td>
+      </tr>
+      <tr>
+        <td>tasks</td>
+        <td>
+          タスク情報。<br>
+          「時間-タスク名」の羅列。<br>
+          例:&nbsp;tasks=00:00:01-Task1,00:00:02-Task2,00:00:03-Task3
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
