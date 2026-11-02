@@ -1,4 +1,5 @@
 // @ts-check
+/// <reference lib="dom" />
 
 import { Task } from './task.js';
 import { Clock } from './clock.js';

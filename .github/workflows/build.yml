@@ -1,0 +1,60 @@
+name: Build
+
+on: [push]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: 'oven/bun:1.4.4'
+    steps:
+
+    - name: Get files
+      uses: actions/checkout@v7.0.1
+
+    - name: Setup
+      run: |
+        apt-get update && apt-get install -y chromium curl gnupg
+        curl -fsSL https://dl.k6.io/key.gpg | gpg --dearmor -o /usr/share/keyrings/k6-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | tee /etc/apt/sources.list.d/k6.list
+        apt-get update && apt-get install k6=2.3.0
+
+    - name: Test
+      run: |
+        bun check ./src/
+        K6_BROWSER_ARGS='no-sandbox' k6 run ./test/test.js
+
+    - name: Build
+      run: |
+        mkdir -p ./dist/
+        cp ./LICENSE ./dist/LICENSE
+        cp ./src/js/help.html ./dist/help.html
+        bun build --compile --target=browser ./src/index.html --outdir=./dist --minify
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v5.0.0
+      with:
+        path: './dist'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    steps:
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6.0.0
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1
