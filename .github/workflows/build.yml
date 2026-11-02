@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
 
-  test:
+  build:
     runs-on: ubuntu-latest
     container:
       image: 'oven/bun:1.4.4'
@@ -29,7 +29,7 @@ jobs:
       run: |
         mkdir -p ./dist/
         cp ./LICENSE ./dist/LICENSE
-        cp ./src/js/help.html ./dist/help.html
+        cp ./src/help.html ./dist/help.html
         bun build --compile --target=browser ./src/index.html --outdir=./dist --minify
 
     - name: Upload artifact
@@ -38,6 +38,7 @@ jobs:
         path: './dist'
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:
